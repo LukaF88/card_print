@@ -19,7 +19,6 @@ export class Tab1Page {
   constructor(public dataservice : DataService, public toastController : ToastController, public cardService : CardpageService){
   }
 
-  private pages: number; 
   private cardsRaw: CardsRaw = [];
   public cards  = {};
   public names = [];
@@ -29,23 +28,27 @@ export class Tab1Page {
   public searchName : string;
 
   ngOnInit(): void {
-   // this.cmd = 'Scarico i dati...'
-    this.dataservice.load(this.pages).subscribe((response:CardsRaw) => {
-      var i = 0;
-      this.cardsRaw = response;
-      // riarrangio le carte raw
+    
+   for (var i = 0; i < 5; i++){
+    this.dataservice.load(i).subscribe((response:CardsRaw) => this.arrangeCards(response))
+   }
+    
+  }
 
-      for (let entry of this.cardsRaw) {
-        if (!this.cards[entry.name]) this.cards[entry.name] = [];
+  arrangeCards (response:CardsRaw) {
+    this.cardsRaw = response;
+    // riarrangio le carte raw
 
-        this.cards[entry.name].push(entry.url);
-        this.names.push(entry.name);
-        
-        if (this.names.length < 20)
-          this.namesShow.push({name : entry.name, expanded: false});
-          this.namesShow.sort();
-          }
-    })
+    for (let entry of this.cardsRaw) {
+      if (!this.cards[entry.name]) this.cards[entry.name] = [];
+
+      this.cards[entry.name].push(entry.url);
+      this.names.push(entry.name);
+      
+      if (this.names.length < 20)
+        this.namesShow.push({name : entry.name, expanded: false});
+        this.namesShow.sort();
+        }
   }
 
   filterItems(searchTerm : string) {

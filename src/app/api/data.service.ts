@@ -17,7 +17,6 @@ export class DataService {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   load(page : number){
-    return this.http.get('http://compiletime.it/apps/card_print/model/dist/cards_0.json', this.httpOptions)
-    //return this.http.get('http://compiletime.it/apps/card_print/model/dist/demo.json', this.httpOptions)
+    return this.http.get('http://compiletime.it/apps/card_print/model/dist/cards_' + page +'.json', this.httpOptions)
 	}
 }
