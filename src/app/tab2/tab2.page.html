@@ -1,0 +1,18 @@
+<ion-content>
+    <ion-row style="height:100%;background-image: url('https://wallpaperplay.com/walls/full/7/7/a/211244.jpg') !important; background-size: cover">
+        <ion-col text-center style="margin-top: 100px;">
+            <ion-text color="dark">
+                <h1>Carte nella pagina: {{cardService.cardPages.length}} </h1>
+              </ion-text>
+            
+            <ion-button color="dark" (click)='emptyCardPage()'>SVUOTA PAGINA</ion-button>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-fab *ngIf="cardService.cardPages.length > 0" vertical="center" horizontal="center" slot="fixed">
+          <ion-fab-button (click)="getPdf()" color="dark">
+            <ion-icon name="download"></ion-icon>
+          </ion-fab-button>
+      </ion-fab>
+</ion-content>

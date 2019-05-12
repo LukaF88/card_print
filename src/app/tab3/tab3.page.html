@@ -1,0 +1,41 @@
+ <ion-content>
+
+   <!-- <ion-card class="welcome-card">
+        <ion-img src="./assets/background.jpg"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Magic Card Search</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Nel tuo deck ci sono {{names.length}} carte</p>
+        </ion-card-content>
+      </ion-card>
+
+        <ion-searchbar
+        [(ngModel)]="searchName"
+        (ionChange)="setFilteredItems()">
+      </ion-searchbar>
+               
+
+    <ion-card text-center (click)="expandItem(item)" *ngFor="let item of namesShow">
+      <ion-card-header>
+        <ion-card-title>{{item.name}}</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <app-accordion-element expandHeight="700px" [expanded]="item.expanded">
+            <div ion-fixed>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col text-center style="height: 560px;">
+                          <ion-fab-button (click)="addCardToPage(cards[item.name][0])" color="dark" style="float: right;">
+                              <ion-icon name="add"></ion-icon>
+                            </ion-fab-button>
+                        <ion-img [src]="cards[item.name][0]" style="height: 480px;"></ion-img>
+                      </ion-col>
+                      </ion-row>
+                </ion-grid>
+              </div>
+        </app-accordion-element>
+      </ion-card-content>
+    </ion-card>-->
+  </ion-content>
