@@ -38,4 +38,9 @@
         </app-accordion-element>
       </ion-card-content>
     </ion-card>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!searchName">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    
   </ion-content>

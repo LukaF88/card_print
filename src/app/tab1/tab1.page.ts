@@ -35,20 +35,33 @@ export class Tab1Page {
     
   }
 
+  private compare( a, b ) {
+    if ( a.nome < b.nome ){
+      return -1;
+    }
+    if ( a.nome > b.nome ){
+      return 1;
+    }
+    return 0;
+  }
+  
   arrangeCards (response:CardsRaw) {
     this.cardsRaw = response;
     // riarrangio le carte raw
 
     for (let entry of this.cardsRaw) {
-      if (!this.cards[entry.name]) this.cards[entry.name] = [];
-
+      if (!this.cards[entry.name]) {
+        this.names.push(entry.name);
+        this.cards[entry.name] = [];
+      }
       this.cards[entry.name].push(entry.url);
-      this.names.push(entry.name);
-      
-      if (this.names.length < 20)
-        this.namesShow.push({name : entry.name, expanded: false});
-        this.namesShow.sort();
-        }
+    }
+
+    this.names.sort();
+
+    for (var i = 0; i < 20; i++){
+      this.namesShow.push({name : this.names[i], expanded: false});
+    }
   }
 
   filterItems(searchTerm : string) {
@@ -65,7 +78,6 @@ export class Tab1Page {
           expanded : false
       }
       });
-      this.namesShow.sort();
     }
 
     setCard(name) {
@@ -114,5 +126,17 @@ export class Tab1Page {
         return listItem;
       });
     }
+  }
+
+  doInfinite(infiniteScroll) {
+    var i = 0;
+    setTimeout(() => {
+      var initalLength = this.namesShow.length;
+      for (var i = initalLength; i < Math.min(initalLength + 5, this.names.length); i++) {
+      this.namesShow.push({name : this.names[i], expanded : false})
+      }
+      console.log('Async operation has ended');
+      infiniteScroll.target.complete();
+    }, 100);
   }
 }
