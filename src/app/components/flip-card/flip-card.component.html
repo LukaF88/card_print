@@ -1,0 +1,11 @@
+<div class="flip-container" (click)="flip($event)" [class.flipped]="flipped">
+
+    <div class="flipper">
+        <div class="front">
+            <ng-content select=".flip-card-front"></ng-content>
+        </div>
+        <div class="back">
+            <ng-content select=".flip-card-back"></ng-content>
+        </div>
+    </div>
+</div>

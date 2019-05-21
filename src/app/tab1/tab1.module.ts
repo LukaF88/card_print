@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { AccordionElementComponent } from "../components/accordion-element/accordion-element.component";
+import { FlipCardComponent } from '../components/flip-card/flip-card.component';
 
 
 @NgModule({
@@ -14,6 +15,6 @@ import { AccordionElementComponent } from "../components/accordion-element/accor
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page, AccordionElementComponent]
+  declarations: [Tab1Page, AccordionElementComponent, FlipCardComponent]
 })
 export class Tab1PageModule {}

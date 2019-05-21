@@ -4,7 +4,8 @@ import { DataService } from '../api/data.service';
 import { ToastController } from '@ionic/angular';
 import { CardpageService } from '../cardpage.service';
 
-type CardsRaw = Array<{name: string, url: string}>;
+type CardDetail = {url: string, mana: string}
+type CardsRaw = Array<{name: string, details: Array<CardDetail>, flip: boolean}>
 type CardLinks = Array<string>;
 type Deck = {name: string, urls: CardLinks};
 
@@ -51,14 +52,15 @@ export class Tab1Page {
 
     for (let entry of this.cardsRaw) {
       if (!this.cards[entry.name]) {
+
         this.names.push(entry.name);
         this.cards[entry.name] = [];
       }
-      this.cards[entry.name].push(entry.url);
+      this.cards[entry.name] = {flippable: entry.flip, details: entry.details};
     }
 
+    // carte da mostrare
     this.names.sort();
-
     for (var i = 0; i < 20; i++){
       this.namesShow.push({name : this.names[i], expanded: false});
     }
@@ -97,18 +99,26 @@ export class Tab1Page {
       this.toast = this.toastController.dismiss();
     }*/
 
-    addCardToPage(link : string){
+    addCardToPage(card){
       var msg = 'Carta aggiunta';
 
       if (this.cardService.cardPages.length == 9) {
         msg = 'Pagina completa'
       }
 
-      else if (this.cardService.cardPages.indexOf(link) != -1){
+      else if (this.cardService.cardPages.indexOf(card.details[0].url) != -1){
         msg = 'Carta gia presente'
       }
+
+      else if (card.flippable) {
+        // devo aggiungere all-array in prima posizione
+        this.cardService.cardPages.splice(0, 0, card.details[0].url);
+        this.cardService.cardBacks.splice(0, 0, card.details[1].url);
+        var msg = 'Aggiunta carta doppia';
+      }
+
       else {
-        this.cardService.cardPages.push(link);
+        this.cardService.cardPages.push(card.details[0].url);
       }
       this.showToast(msg);
     }
@@ -132,7 +142,7 @@ export class Tab1Page {
     var i = 0;
     setTimeout(() => {
       var initalLength = this.namesShow.length;
-      for (var i = initalLength; i < Math.min(initalLength + 5, this.names.length); i++) {
+      for (var i = initalLength; i < Math.min(initalLength + 10, this.names.length); i++) {
       this.namesShow.push({name : this.names[i], expanded : false})
       }
       console.log('Async operation has ended');

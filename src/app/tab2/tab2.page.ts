@@ -13,12 +13,13 @@ export class Tab2Page{
   constructor(public cardService : CardpageService){}
 
   getPdf = () => {
-    var urlDownload = this.cardService.getPdfUrl();
+    var urlDownload = this.cardService.getPdfUrl(2);
     window.open(urlDownload);
   }
 
   emptyCardPage = () => {
     this.cardService.cardPages = [];
+    this.cardService.cardBacks = [];
   }
 
 

@@ -14,7 +14,6 @@
         [(ngModel)]="searchName"
         (ionChange)="setFilteredItems()">
       </ion-searchbar>
-               
 
     <ion-card text-center (click)="expandItem(item)" *ngFor="let item of namesShow">
       <ion-card-header>
@@ -22,19 +21,20 @@
       </ion-card-header>
   
       <ion-card-content>
-        <app-accordion-element expandHeight="700px" [expanded]="item.expanded">
-            <div ion-fixed>
-                <ion-grid>
-                    <ion-row>
-                      <ion-col text-center style="height: 560px;">
-                          <ion-fab-button (click)="addCardToPage(cards[item.name][0])" color="dark" style="float: right;">
+        <app-accordion-element expandHeight="100%" [expanded]="item.expanded">
+                        <div style="max-width:560px; min-width:350px; margin:auto">
+                          <ion-fab-button (click)="addCardToPage(cards[item.name])" color="dark" style="margin:auto" [disabled]="false && cards[item.name].flippable">
                               <ion-icon name="add"></ion-icon>
-                            </ion-fab-button>
-                        <ion-img [src]="cards[item.name][0]" style="height: 480px;"></ion-img>
-                      </ion-col>
-                      </ion-row>
-                </ion-grid>
-              </div>
+                          </ion-fab-button>
+                          <div style="width:80%; margin:auto">
+                              <!--<ion-img [src]="cards[item.name].details[0].url" *ngIf="!cards[item.name].flippable"></ion-img>-->
+                              <flip-card *ngIf="cards[item.name].flippable">
+                                  <ion-img class="flip-card-front" [src]="cards[item.name].details[0].url"></ion-img>
+                                  <ion-img class="flip-card-back" [src]="cards[item.name].details[1].url"></ion-img>
+                              </flip-card>
+                              <ion-img [src]="cards[item.name].details[0].url" [style.visibility]="cards[item.name].flippable ? 'hidden' : 'visible'"></ion-img>
+                          </div>
+                        </div>
         </app-accordion-element>
       </ion-card-content>
     </ion-card>
