@@ -1,5 +1,7 @@
 {
   "name": "magic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

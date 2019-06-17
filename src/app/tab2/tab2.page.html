@@ -1,18 +1,33 @@
 <ion-content>
-    <ion-row style="height:100%;background-image: url('https://wallpaperplay.com/walls/full/7/7/a/211244.jpg') !important; background-size: cover">
-        <ion-col text-center style="margin-top: 100px;">
-            <ion-text color="dark">
-                <h1>Carte nella pagina: {{cardService.cardPages.length}} </h1>
-              </ion-text>
+    <ion-row style="height:100%;background-image: url('./assets/background-tab2.jpg') !important; background-size: 100%">
+        <ion-col text-center style="margin: auto;">
             
-            <ion-button color="dark" (click)='emptyCardPage()'>SVUOTA PAGINA</ion-button>
+          <ion-list style="background: transparent">
 
+                <ion-item>
+                    <ion-text color="dark">
+                        <h1>Carte nella pagina: {{cardService.data.cardPages.length}} </h1>
+                      </ion-text>
+                </ion-item>
+              <ion-item>
+                <ion-label>Fronte / retro </ion-label>
+                <ion-toggle [(ngModel)]="isToggled" [disabled]="cardService.data.sides == -2"></ion-toggle>
+              </ion-item>
+
+              <ion-item>
+                <ion-button color="dark" (click)='emptyCardPage()' style="margin: auto;">SVUOTA PAGINA</ion-button>
+              </ion-item>
+
+              <ion-item *ngIf="cardService.data.cardPages.length > 0">
+                <ion-fab-button (click)="getPdf()" color="dark" style="margin: auto;">
+                  <ion-icon name="download"></ion-icon>
+                </ion-fab-button>
+              </ion-item>
+
+            </ion-list>
+            
         </ion-col>
       </ion-row>
 
-      <ion-fab *ngIf="cardService.cardPages.length > 0" vertical="center" horizontal="center" slot="fixed">
-          <ion-fab-button (click)="getPdf()" color="dark">
-            <ion-icon name="download"></ion-icon>
-          </ion-fab-button>
-      </ion-fab>
+
 </ion-content>

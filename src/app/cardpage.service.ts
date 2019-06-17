@@ -1,24 +1,40 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { of } from 'rxjs/internal/observable/of';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 type CardLinks = Array<string>;
+type DataCarta = {cardPages: Array<CardLinks>, cardBacks: Array<CardLinks>, sides: number}
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardpageService {
+export class CardpageService implements OnInit {
 
-  constructor() { }
+  ngOnInit(): void {
+  }
 
-  public cardPages: CardLinks = [];
-  public cardBacks: CardLinks = [];
+   constructor() {}
 
-  public getPdfUrl(sides:number){
-    var args = this.cardPages.join('|')
+   public data: DataCarta = {
+    cardPages : [],
+    cardBacks : [],
+    sides : 1
+   };
+
+   public sidesObs = new BehaviorSubject<number>(this.data.sides);
+
+   public updateSides(newValue: number): void {
+    this.data.sides = newValue;
+    this.sidesObs.next(newValue);
+  }
+
+  getPdfUrl(sides:number){
+    var args = this.data.cardPages.join('|')
     var backUrlPart = ''
-    //return 'http://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image.php?cards=' + btoa(args);
-    if (this.cardBacks.length > 0) {
-      backUrlPart = '&d-cards=' + btoa(''+this.cardBacks.join('|'))
+    if (this.data.cardBacks.length > 0) {
+      backUrlPart = '&d-cards=' + btoa(''+this.data.cardBacks.join('|'))
     }
-    return 'http://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image_v2.php?cards=' + btoa(args) + '&sides=' + btoa(''+sides) + backUrlPart;
+    return 'http://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image_v2.php?cards=' + btoa(args) + '&sides=' + btoa(''+Math.abs(sides)) + backUrlPart;
   }
   
 }

@@ -7,6 +7,7 @@ import { CardpageService } from '../cardpage.service';
 type CardsRaw = Array<{name: string, url: string}>;
 type CardLinks = Array<string>;
 type Deck = {name: string, urls: CardLinks};
+type DataCarta = {cardPages: Array<CardLinks>, cardBacks: Array<CardLinks>, sides: number}
 
 @Component({
   selector: 'app-tab3',
@@ -30,7 +31,7 @@ export class Tab3Page {
 
   ngOnInit(): void {
    // this.cmd = 'Scarico i dati...'
-    this.dataservice.load(this.pages).subscribe((response:CardsRaw) => {
+/*     this.dataservice.load(this.pages).then( res => res.data.json())  => {
       var i = 0;
       this.cardsRaw = response;
       // riarrangio le carte raw
@@ -45,7 +46,7 @@ export class Tab3Page {
           this.namesShow.push({name : entry.name, expanded: false});
           this.namesShow.sort();
           }
-    })
+    }) */
   }
 
   filterItems(searchTerm : string) {
@@ -85,15 +86,15 @@ export class Tab3Page {
     addCardToPage(link : string){
       var msg = 'Carta aggiunta';
 
-      if (this.cardService.cardPages.length == 9) {
+      if (this.cardService.data.cardPages.length == 9) {
         msg = 'Pagina completa'
       }
 
-      else if (this.cardService.cardPages.indexOf(link) != -1){
+      else if (this.cardService.data.cardPages[0].indexOf(link) != -1){
         msg = 'Carta gia presente'
       }
       else {
-        this.cardService.cardPages.push(link);
+        this.cardService.data.cardPages[0].push(link);
       }
       this.showToast(msg);
     }
