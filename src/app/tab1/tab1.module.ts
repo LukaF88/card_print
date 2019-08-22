@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
-import { AccordionElementComponent } from "../components/accordion-element/accordion-element.component";
+import { AccordionElementComponent } from '../components/accordion-element/accordion-element.component';
 import { FlipCardComponent } from '../components/flip-card/flip-card.component';
 
 

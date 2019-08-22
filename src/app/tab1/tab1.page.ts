@@ -27,9 +27,9 @@ export class Tab1Page {
   public searchName: string;
 
   ngOnInit(): void {
-   for (let i = 0; i < 5; i++){
+   for (let i = 0; i < 5; i++) {
     // this.dataservice.load(i).subscribe((response:CardsRaw) => this.arrangeCards(response))
-    this.dataservice.load(i).then(response => response.data.json().subscribe((data: CardsRaw) => this.arrangeCards(data)));
+    this.dataservice.load(i).subscribe((response: CardsRaw) => this.arrangeCards(response));
    }
   }
 
