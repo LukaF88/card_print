@@ -7,7 +7,6 @@ import { Tab1Page } from './tab1.page';
 import { AccordionElementComponent } from '../components/accordion-element/accordion-element.component';
 import { FlipCardComponent } from '../components/flip-card/flip-card.component';
 
-
 @NgModule({
   imports: [
     IonicModule,

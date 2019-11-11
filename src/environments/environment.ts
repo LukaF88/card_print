@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  modelUrl : 'http://localhost:4200/model', // http://compiletime.it/apps/card_print/model-new/repo.php?page='
+  pdfUrl : 'https://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image_v2.php?cards='
 };
 
 /*

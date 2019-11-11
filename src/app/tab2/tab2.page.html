@@ -24,6 +24,12 @@
                 </ion-fab-button>
               </ion-item>
 
+              <ion-item *ngIf="cardService.data.cardPages.length > 0">
+                <ion-fab-button (click)="getPdf2()" color="dark" style="margin: auto;">
+                  <ion-icon name="download2"></ion-icon>
+                </ion-fab-button>
+              </ion-item>
+
             </ion-list>
             
         </ion-col>

@@ -10,34 +10,50 @@
         </ion-card-content>
       </ion-card>
 
+      <ion-grid style="background-color:#eee">
+          <ion-row>
+            <ion-col size-md="6" size-sm="12" offset-md="3" offset-sm="0">
+
         <ion-searchbar
         [(ngModel)]="searchName"
         (ionChange)="setFilteredItems()">
       </ion-searchbar>
+</ion-col>
+</ion-row>
+      </ion-grid>
+      <ion-grid style="background-color:#eee">
+          <ion-row>
+            <ion-col size-md="6" size-sm="12" offset-md="3" offset-sm="0">
+                <ion-card text-center (click)="expandItem(item)" *ngFor="let item of namesShow" style="background-color:#fff">
+                    <ion-card-header>
+                      <ion-card-title>{{item.name}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <app-accordion-element expandHeight="100%" [expanded]="item.expanded">
+                          <ion-grid style="background-color:#eee">
+                            <ion-row>
+                                <ion-col size-xs="6" offset-xs="3">
+                                    <flip-card *ngIf="cards[item.name].flippable">
+                                        <ion-img class="flip-card-front" [src]="cards[item.name].details[0].url"></ion-img>
+                                        <ion-img class="flip-card-back" [src]="cards[item.name].details[1].url"></ion-img>
+                                    </flip-card>
+                                    <ion-img [src]="cards[item.name].details[0].url" [style.visibility]="cards[item.name].flippable ? 'hidden' : 'visible'"></ion-img>
+                                </ion-col>
+                                <ion-col size-xs="2">
+                                    <ion-fab-button (click)="addCardToPage(cards[item.name])" color="dark" style="float:right" [disabled]="false && cards[item.name].flippable">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-fab-button>
+                                </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                      </app-accordion-element>
+                    </ion-card-content>
+                  </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-    <ion-card text-center (click)="expandItem(item)" *ngFor="let item of namesShow">
-      <ion-card-header>
-        <ion-card-title>{{item.name}}</ion-card-title>
-      </ion-card-header>
-  
-      <ion-card-content>
-        <app-accordion-element expandHeight="100%" [expanded]="item.expanded">
-                        <div style="max-width:560px; min-width:350px; margin:auto">
-                          <ion-fab-button (click)="addCardToPage(cards[item.name])" color="dark" style="margin:auto" [disabled]="false && cards[item.name].flippable">
-                              <ion-icon name="add"></ion-icon>
-                          </ion-fab-button>
-                          <div style="width:80%; margin:auto">
-                              <!--<ion-img [src]="cards[item.name].details[0].url" *ngIf="!cards[item.name].flippable"></ion-img>-->
-                              <flip-card *ngIf="cards[item.name].flippable">
-                                  <ion-img class="flip-card-front" [src]="cards[item.name].details[0].url"></ion-img>
-                                  <ion-img class="flip-card-back" [src]="cards[item.name].details[1].url"></ion-img>
-                              </flip-card>
-                              <ion-img [src]="cards[item.name].details[0].url" [style.visibility]="cards[item.name].flippable ? 'hidden' : 'visible'"></ion-img>
-                          </div>
-                        </div>
-        </app-accordion-element>
-      </ion-card-content>
-    </ion-card>
+
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!searchName">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

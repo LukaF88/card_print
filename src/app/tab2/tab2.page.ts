@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CardpageService } from '../cardpage.service';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-tab2',
@@ -58,6 +57,17 @@ export class Tab2Page implements OnInit{
     this.cardService.data.cardBacks = []
     this.cardService.updateSides(1)
   }
+
+
+  // POST
+  getPdf2 = () => {
+    this.cardService.getFile()
+  }
+
+
+ 
+
+
 
 
 }

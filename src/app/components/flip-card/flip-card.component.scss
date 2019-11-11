@@ -29,13 +29,12 @@
 
         /* hide back of pane during swap */
         .front, .back {
-            display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; 
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             margin: 0;
             position: absolute;
-            top: 220px;
             left: 0;
         }
 
