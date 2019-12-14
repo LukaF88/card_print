@@ -26,6 +26,7 @@ export class DataService {
 
   load(page: number) {
     const headers = {};
-    return this.http.get( environment.modelUrl +'/'+ page + '.json', this.httpOptions);
+    //return this.http.get( environment.modelUrl +'/'+ page + '.json', this.httpOptions);
+    return this.http.get( environment.modelUrl +'?page='+ page, this.httpOptions);
     }
 }

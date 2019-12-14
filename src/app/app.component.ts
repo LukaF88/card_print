@@ -24,6 +24,18 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.platform.backButton.subscribe(() => {
+        /*let toast = this.toastCtrl.create({
+          message: 'Press back again to exit App',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+        */navigator['app'].exitApp();
+      });
     });
   }
+
+ 
 }
