@@ -8,8 +8,8 @@ export const environment = {
  // pdfUrl : 'https://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image_v2.php?cards='
 
  //modelUrl : 'https://fir-dcac6.firebaseapp.com/model',
- modelUrl : 'https://compiletime.it/apps/card_print/model-new/CORS/index_cors.php',
- pdfUrl : 'https://compiletime.it/apps/card_print/pdf/TCPDF-master/examples/image_v2.php?cards='
+ modelUrl : 'http://apps.zendownloader.com:8083/api/model-new/CORS/index_cors.php',
+ pdfUrl : 'http://apps.zendownloader.com:8083/api/pdf/TCPDF-master/examples/image_v2.php?cards='
 };
 
 /*
